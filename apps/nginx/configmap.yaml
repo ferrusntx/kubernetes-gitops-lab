@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-gitops-content
+  namespace: dev-app
+data:
+  index.html: |
+    <html>
+      <head>
+        <title>GitOps Lab</title>
+      </head>
+      <body>
+        <h1>Kubernetes + Argo CD</h1>
+        <h2>Deployment managed with GitOps</h2>
+        <p>Version 1.0</p>
+      </body>
+    </html>
