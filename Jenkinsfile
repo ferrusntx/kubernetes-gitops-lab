@@ -1,4 +1,5 @@
 pipeline {
+
     agent any
 
     stages {
@@ -37,6 +38,12 @@ pipeline {
             steps {
                 sshagent(credentials: ['github-jenkins-ssh']) {
                     sh '''
+                        mkdir -p ~/.ssh
+                        chmod 700 ~/.ssh
+
+                        ssh-keyscan github.com >> ~/.ssh/known_hosts
+                        chmod 600 ~/.ssh/known_hosts
+
                         git config user.name "Jenkins CI"
                         git config user.email "jenkins@gitops-lab.local"
 
@@ -63,6 +70,7 @@ pipeline {
     }
 
     post {
+
         success {
             echo 'Jenkins CI pipeline completed successfully!'
         }
